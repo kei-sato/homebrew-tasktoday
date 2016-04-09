@@ -425,17 +425,16 @@ CMD="$1"
 shift
 
 case $CMD in
-  ad*) addTask "$@";;
-  ca*) cancelTask "$@";;
+  ad|add) addTask "$@";;
+  ca|can|cancel) cancelTask "$@";;
   clear) :> "$TODAY_FILE";;
-  en*) endTask "$@";;
-  ed*) ${EDITOR:-vim} "$TODAY_FILE";;
-  fin*) getTasks finished;;
+  en|end) endTask "$@";;
+  ed|edi|edit) ${EDITOR:-vim} "$TODAY_FILE";;
+  fin|finished) getTasks finished;;
   file|path) echo "$TODAY_FILE";;
-  in*) addTask -i "$@";;
-  ls) cat "$TODAY_FILE";;
+  in|ins|insert) addTask -i "$@";;
   remain) getTasks remain;;
-  st*) startTask "$@";;
+  st|sta|start) startTask "$@";;
   help) abort "$USAGE";;
   *) addTask "$CMD" "$@"
 esac
