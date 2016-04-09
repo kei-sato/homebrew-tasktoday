@@ -3,7 +3,33 @@
 set -e
 
 USAGE="
-Usage: $0
+Recommend:
+
+  alias tt=tasktoday
+
+Usage:
+
+  $0 (ad|in|st|en|ca|clear|ed|path|help) [options...]
+
+Example:
+
+  - add a task with its estimated time 1 hour
+    tt ad -e 1 house keep
+
+  - insert a task (its estimated time is default to 0.5 hour)
+    tt in fit
+
+  - start a task
+    tt st
+
+  - end a task, and start next task (default)
+    tt en
+
+  - cancel current task
+    tt ca
+
+  - edit tasks
+    tt ed
 "
 
 eecho() { echo "$@" 1>&2; }
