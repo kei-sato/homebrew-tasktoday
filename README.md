@@ -2,7 +2,7 @@
 
 ```
 brew tap kei-sato/tasktoday
-brew install tasktoday
+berw install tasktoday
 ```
 
 # usage
@@ -40,3 +40,10 @@ Example:
     tt ed
 ```
 
+# FAQ
+
+## What is the difference between `add` and `insert`?
+
+`insert` will insert a task on the top of the remain tasks
+
+`add` will add a task to the bottom of the all tasks
