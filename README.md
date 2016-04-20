@@ -5,6 +5,13 @@ brew tap kei-sato/tasktoday
 brew install tasktoday
 ```
 
+# upgrade 
+
+```
+brew update
+brew upgrade tasktoday
+```
+
 # usage
 
 ```
