@@ -28,6 +28,9 @@ Example:
   - cancel current task
     tt ca
 
+  - remove current task
+    tt rm
+
   - edit tasks
     tt ed
 "
@@ -414,6 +417,26 @@ cancelTask() {
   printTasksWithGoal
 }
 
+removeTask() {
+  [[ -s "$TODAY_FILE" ]] || { abort "no tasks"; }
+  REMOVED=false
+  TMPFILE=$(mktemp)
+  while read -r line; do
+    $REMOVED && { echo "$line"; continue; }
+
+    END=$(cut -d$'\t' -f"$INDEX_END" <<< "$line")
+
+    if [[ -z $END ]]; then
+      # ignore the first 'not finished' line
+      REMOVED=true
+    else
+      echo "$line"
+    fi
+  done < "$TODAY_FILE" > "$TMPFILE"
+  mv "$TMPFILE" "$TODAY_FILE"
+  printTasksWithGoal
+}
+
 colNames() {
   echo "ESTIMATE"$'\t'"TITLE"$'\t'"START"$'\t'"END"$'\t'"REPEAT"$'\t'"TAGS"
 }
@@ -453,6 +476,7 @@ shift
 case $CMD in
   ad|add) addTask "$@";;
   ca|can|cancel) cancelTask "$@";;
+  del|delete|rm|remove) removeTask "$@";;
   clear) :> "$TODAY_FILE";;
   en|end) endTask "$@";;
   ed|edi|edit) ${EDITOR:-vim} "$TODAY_FILE";;
